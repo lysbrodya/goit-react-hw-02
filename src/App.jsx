@@ -12,32 +12,40 @@ const Options = ({ children, onHandleClick }) => {
   );
 };
 
-const Feedback = ({ good, neutral, bad }) => {
+const Feedback = ({ positive, total, good, neutral, bad }) => {
   return (
     <div>
-      <p>good: {good}</p>
-      <p>neutral: {neutral}</p>
-      <p>bad: {bad}</p>
-      <p></p>
-      <p></p>
+      <p>Good: {good}</p>
+      <p>Neutral: {neutral}</p>
+      <p>Bad: {bad}</p>
+      <p>Total: {total}</p>
+      <p>Positive: {positive} %</p>
     </div>
   );
 };
-
+const Notification = () => {
+  return <p>No feedback yet</p>;
+};
 export default function App() {
-  // const [good, setGood] = useState(0);
-  // const [neutral, setNeutral] = useState(0);
-  // const [bad, setBad] = useState(0);
-
   const [states, setStates] = useState({
     good: 0,
     neutral: 0,
     bad: 0,
   });
-
   const updateFeedback = (key) => {
     setStates({ ...states, [key]: states[key] + 1 });
   };
+  const onReset = () => {
+    setStates({
+      good: 0,
+      neutral: 0,
+      bad: 0,
+    });
+  };
+  const totalFeedback = states.good + states.neutral + states.bad;
+  const PositiveFeedback = Math.round(
+    ((states.good + states.neutral) / totalFeedback) * 100
+  );
   return (
     <>
       {" "}
@@ -60,11 +68,18 @@ export default function App() {
       <Options bad={states.bad} onHandleClick={() => updateFeedback("bad")}>
         Bad
       </Options>
-      <Feedback
-        good={states.good}
-        neutral={states.neutral}
-        bad={states.bad}
-      ></Feedback>
+      {totalFeedback !== 0 && <Options onHandleClick={onReset}>Reset</Options>}
+      {totalFeedback !== 0 ? (
+        <Feedback
+          good={states.good}
+          neutral={states.neutral}
+          bad={states.bad}
+          total={totalFeedback}
+          positive={PositiveFeedback}
+        ></Feedback>
+      ) : (
+        <Notification />
+      )}
     </>
   );
 }
