@@ -23,3 +23,10 @@ img {
   display: block;
   max-width: 100%;
 }
+
+button,
+p {
+  padding: 3px;
+
+  margin: 5px;
+}
