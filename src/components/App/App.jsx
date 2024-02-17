@@ -3,7 +3,6 @@ import Options from "../Options/Options";
 import Notification from "../Notifications/Notification";
 import Feedback from "../Feedback/Feedback";
 import { useEffect, useState } from "react";
-import "./App.css";
 
 export default function App() {
   const [states, setStates] = useState(() => {
