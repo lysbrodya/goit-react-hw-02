@@ -52,7 +52,7 @@ export default function App() {
           positive={PositiveFeedback}
         ></Feedback>
       ) : (
-        <Notification />
+        <Notification>No feedback yet</Notification>
       )}
     </>
   );

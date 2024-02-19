@@ -1,3 +1,5 @@
-export default function Notification() {
-  return <p>No feedback yet</p>;
+import { Children } from "react";
+
+export default function Notification({ children }) {
+  return <p>{children}</p>;
 }
